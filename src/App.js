@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "./logo.svg";
 import "./App.css";
 
-import AddDevice from "./components/addDevice";
+import AddDevice from "./components/AddDevice";
 import Device from "./components/Device";
 import DeviceList from "./components/DeviceList";
 

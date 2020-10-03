@@ -1,107 +1,105 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import DeviceDataService from "../services/deviceService";
+import { v4 as uuidv4 } from "uuid";
 
-export default class AddDevice extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.saveDevice = this.saveDevice.bind(this);
-    this.newDevice = this.newDevice.bind(this);
+const AddDevice = () => {
+  const defaultDeviceState = {
+    id: uuidv4(),
+    name: "",
+    path: "",
+    description: "",
+    published: false,
+  };
 
-    this.state = {
-      id: null,
-      name: "",
-      path: "",
-      description: "",
-      submitted: false,
-    };
-  }
+  const [device, setDevice] = useState(defaultDeviceState);
+  const [submitted, setSubmitted] = useState(false);
 
-  onChangeName(e) {
-    this.setState({
-      name: e.target.value,
-    });
-  }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setDevice({ ...device, [name]: value });
+  };
 
-  saveDevice() {
-    const data = {
-      name: this.state.name,
-      description: this.state.description,
-      path: this.state.path,
-      id: this.state.id,
+  const saveDevice = () => {
+    var data = {
+      name: device.name,
+      description: device.description,
+      path: device.path,
     };
 
-    var myInit = { method: "POST", headers: {}, body: data };
-    fetch("/device", myInit)
-      .then((response) => {
-        this.setState({
-          id: response.data.id,
-          name: response.data.name,
-          description: response.data.description,
-          path: response.data.path,
-          submitted: true,
-        });
-        return response.json();
-      })
-      .then((jsonResponse) => {
-        console.log(jsonResponse);
-      })
-      .catch((e) => console.log(e));
-  }
-
-  newDevice() {
-    this.setState({
-      id: null,
-      name: "",
-      path: "",
-      description: "",
-      submitted: false,
+    DeviceDataService.add(data).then((response) => {
+      setDevice({
+        id: response.data.id,
+        name: response.data.name,
+        description: response.data.description,
+        path: response.data.path,
+      });
+      setSubmitted(true);
+      console.log(response.data);
     });
-  }
+  };
 
-  render() {
-    return (
-      <div className="submit-form">
-        {this.state.submitted ? (
-          <div>
-            <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newDevice}>
-              Add
-            </button>
+  const newDevice = () => {
+    setDevice(defaultDeviceState);
+    setSubmitted(false);
+  };
+
+  return (
+    <div className="submit-form">
+      {submitted ? (
+        <div>
+          <h4>You submitted successfully!</h4>
+          <button className="btn btn-success" onClick={newDevice}>
+            Add
+          </button>
+        </div>
+      ) : (
+        <div>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              required
+              value={device.name}
+              onChange={handleInputChange}
+              name="name"
+            />
           </div>
-        ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                required
-                value={this.state.name}
-                onChange={this.onChangeName}
-                name="name"
-              />
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                required
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-                name="description"
-              />
-            </div>
-
-            <button onClick={this.saveDevice} className="btn btn-success">
-              Submit
-            </button>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              required
+              value={device.description}
+              onChange={handleInputChange}
+              name="description"
+            />
           </div>
-        )}
-      </div>
-    );
-  }
-}
+
+          <div className="form-group">
+            <label htmlFor="path">Path</label>
+            <input
+              type="text"
+              className="form-control"
+              id="path"
+              required
+              value={device.path}
+              onChange={handleInputChange}
+              name="path"
+            />
+          </div>
+
+          <button onClick={saveDevice} className="btn btn-success">
+            Submit
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AddDevice;
