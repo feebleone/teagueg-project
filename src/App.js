@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+minor import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "./logo.svg";
 import "./App.css";
 
 import AddDevice from "./components/AddDevice";
 import Device from "./components/Device";
-import DeviceList from "./components/DeviceList";
+import DeviceList from "./components/DevicesList";
 
 function App() {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/devices" className="navbar-brand">
-          Cook Keeper
+          Coop Keeper
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
