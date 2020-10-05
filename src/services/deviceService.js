@@ -4,7 +4,9 @@ const getAll = () => {
   return http.get("/devices");
 };
 const get = (id) => {
-  return http.get(`/devices/${id}`);
+  const val = http.get(`/devices/${id}`);
+  console.log(val);
+  return val;
 };
 const add = (data) => {
   return http.post("/devices", data);
