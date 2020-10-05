@@ -114,6 +114,12 @@ const DevicesList = () => {
             <h4>Device</h4>
             <div>
               <label>
+                <strong>ID:</strong>
+              </label>{" "}
+              {currentDevice.id}
+            </div>
+            <div>
+              <label>
                 <strong>Name:</strong>
               </label>{" "}
               {currentDevice.name}

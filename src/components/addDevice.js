@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import DeviceDataService from "../services/deviceService";
-import { v4 as uuidv4 } from "uuid";
 
 const AddDevice = () => {
   const defaultDeviceState = {
-    id: uuidv4(),
+    id: "",
     name: "",
     path: "",
     description: "",
