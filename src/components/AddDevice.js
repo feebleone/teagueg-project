@@ -60,7 +60,7 @@ const AddDevice = () => {
               className="form-control"
               id="name"
               required
-              value={device.name}
+              value={device.name || ""}
               onChange={handleInputChange}
               name="name"
             />
@@ -73,7 +73,7 @@ const AddDevice = () => {
               className="form-control"
               id="description"
               required
-              value={device.description}
+              value={device.description || ""}
               onChange={handleInputChange}
               name="description"
             />
@@ -86,7 +86,7 @@ const AddDevice = () => {
               className="form-control"
               id="path"
               required
-              value={device.path}
+              value={device.path || ""}
               onChange={handleInputChange}
               name="path"
             />
