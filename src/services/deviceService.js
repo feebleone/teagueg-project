@@ -5,7 +5,6 @@ const getAll = () => {
 };
 const get = (id) => {
   const val = http.get(`/devices/${id}`);
-  console.log(val);
   return val;
 };
 const add = (data) => {
