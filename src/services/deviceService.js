@@ -20,7 +20,7 @@ const removeAll = () => {
   return http.delete(`/devices`);
 };
 const findByName = (name) => {
-  return http.get(`/devices?name=${name}`);
+  return http.get(`/devices?any=${name}`);
 };
 
 export default {
