@@ -1,7 +1,8 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+
+import "./App.scss";
 
 import AddDevice from "./components/AddDevice";
 import Device from "./components/Device";
@@ -30,7 +31,7 @@ function App() {
             </Link>
           </li>
 
-          <li className="nav-item">---</li>
+          <li className="nav-item">&emsp;</li>
 
           <li className="nav-item">
             <Link to={"/sensors"} className="nav-link">
