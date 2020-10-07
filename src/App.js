@@ -7,6 +7,10 @@ import AddDevice from "./components/AddDevice";
 import Device from "./components/Device";
 import DeviceList from "./components/DevicesList";
 
+import AddSensor from "./components/AddSensor";
+import Sensor from "./components/Sensor";
+import SensorList from "./components/SensorsList";
+
 function App() {
   return (
     <div>
@@ -21,8 +25,21 @@ function App() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to={"/add"} className="nav-link">
-              Add
+            <Link to={"/adddevice"} className="nav-link">
+              Add Device
+            </Link>
+          </li>
+
+          <li className="nav-item">---</li>
+
+          <li className="nav-item">
+            <Link to={"/sensors"} className="nav-link">
+              Sensors
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/addsensor"} className="nav-link">
+              Add Sensor
             </Link>
           </li>
         </div>
@@ -31,8 +48,11 @@ function App() {
       <div className="container mt-3">
         <Switch>
           <Route exact path={["/", "/devices"]} component={DeviceList} />
-          <Route exact path="/add" component={AddDevice} />
+          <Route exact path="/adddevice" component={AddDevice} />
           <Route path="/devices/:id" component={Device} />
+          <Route exact path={["/", "/sensors"]} component={SensorList} />
+          <Route exact path="/addsensor" component={AddSensor} />
+          <Route path="/sensors/:id" component={Sensor} />
         </Switch>
       </div>
     </div>
